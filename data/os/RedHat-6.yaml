@@ -1,0 +1,5 @@
+realmd::packages:
+  - "sssd"
+
+realmd::services:
+  - "sssd"
