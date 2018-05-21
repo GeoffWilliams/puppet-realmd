@@ -1,4 +1,4 @@
-<%- | String $domain | -%>
+<%- | String $domain, Array[String] $groups | -%>
 [sssd]
 config_file_version = 2
 domains = <%= $domain %>
@@ -35,3 +35,4 @@ access_provider = simple
 use_fully_qualified_names = False
 override_homedir=/home/%u
 override_shell=/bin/bash
+simple_allow_groups=<%= $groups.join(",") %>

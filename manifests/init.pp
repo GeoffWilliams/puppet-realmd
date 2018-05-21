@@ -1,6 +1,22 @@
 # Realmd
-# Fixme fails to start sssd if ANY file is present at /etc/sssd/sssd.conf!
-# @param packages List of packages to install to enable support
+#
+# Support for Relmd+SSSD on RHEL 7.
+#
+# @example joining a domain
+#   class { "realmd":
+#     domain      => "mydomain",
+#     ad_username => "myuser",
+#     ad_password => "topsecret",
+#     ou          => ['linux', 'servers'],
+#     groups      => ['admins', 'superadmins']
+#   }
+#
+# @param packages List of packages to install to enable support (from in-module data)
+# @param domain Domain to join
+# @param ad_password AD password to use for joining
+# @param ou Array of OUs to use for joining eg `foo,bar,baz` (OU= will be added for you)
+# @param services List of services to enable for SSD/Realmd
+# @param groups List of groups to add to `simple_allow_groups` (will be flattened for you)
 class realmd(
     Array[String] $packages,
     String $domain,
@@ -15,15 +31,9 @@ class realmd(
     ensure => present,
   }
 
-
-  # FIXME raw groups like this?
-  # content has to be string interpolated or funky casting gives an error about integer conversion, has to broken
-  # into variables to prevent lint and syntax errors (although it works... go figure)
-  $groups_flattened = $groups.join(" ")
-  $template_contents = epp('realmd/sssd.conf.epp', {domain => $domain})
   file { '/etc/sssd/sssd.conf':
     ensure  => present,
-    content => "${groups_flattened}\n${template_contents}",
+    content => epp('realmd/sssd.conf.epp', {domain => $domain, groups => $groups}),
     owner   => "root",
     group   => "root",
     mode    => '0600',
@@ -52,44 +62,6 @@ class realmd(
     ensure => running,
     enable => true,
   }
-
-
-  # FIXME these are already in place - needed? tweaks?
-  # file { '/etc/pam.d/password-auth':
-  #   ensure => file,
-  #   owner => 'root',
-  #   group => 'root',
-  #   mode => '0644',
-  #   source => $password_auth_source,
-  # }
-  #
-  # file { '/etc/pam.d/system-auth':
-  #   ensure => file,
-  #   owner => 'root',
-  #   group => 'root',
-  #   mode => '0644',
-  #   source => $system_auth_source,
-  # }
-
-
-  # SMB doesnt seem used?
-  #    class { '::smb':
-  #      realm           => $domain,
-  #      workgroup       => $workgroup,
-  #      passwordserver  => $pwserver,
-  #      linuxou         => $linixou,
-  #      adusername      => $username,
-  #      adpassword      => $password,
-  #    }->
-
-
-  # FIXME whats this?
-  # class { '::sssd_realmd':
-  #   sssd_domain                    => $domain,
-  #   sssd_ldap_user_search_base     => $searchbase,
-  #   sssd_ldap_group_search_base    => $searchbase,
-  #   allowed_groups                 => [ $groups ],
-  # }
 
 }
 
