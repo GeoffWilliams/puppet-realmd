@@ -27,11 +27,29 @@ class realmd(
     Array[String] $groups = []
 ) {
 
+  # flatten the array of $ou
+  $_ou = join($ou.map |$o| {
+    "OU=${o}"
+  }, ",")
+
+
   package { $packages:
     ensure => present,
   }
 
-  file { '/etc/sssd/sssd.conf':
+  -> exec { "sssd SSH keypair":
+    command => "ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key",
+    path    => ['/bin', '/usr/bin'],
+    creates => '/etc/ssh/ssh_host_dsa_key',
+  }
+
+  -> exec { "join realm":
+    command => "/bin/echo ${ad_password} | realm join ${domain} -U ${ad_username} --computer-ou=${_ou}",
+    path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",
+    creates => "/etc/krb5.keytab",
+  }
+
+  -> file { '/etc/sssd/sssd.conf':
     ensure  => present,
     content => epp('realmd/sssd.conf.epp', {domain => $domain, groups => $groups}),
     owner   => "root",
@@ -40,25 +58,7 @@ class realmd(
     notify  => Service[$services],
   }
 
-  exec { "sssd SSH keypair":
-    command => "ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key",
-    path    => ['/bin', '/usr/bin'],
-    creates => '/etc/ssh/ssh_host_dsa_key',
-  }
-
-  # flatten the array of $ou
-  $_ou = join($ou.map |$o| {
-    "OU=${o}"
-  }, ",")
-
-  exec { "join realm":
-    command => "/bin/echo ${ad_password} | realm join ${domain} -U ${ad_username} --computer-ou=${_ou}",
-    path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",
-    creates => "/etc/krb5.keytab",
-    require => Package[$packages],
-  }
-
-  service { $services:
+  -> service { $services:
     ensure => running,
     enable => true,
   }
