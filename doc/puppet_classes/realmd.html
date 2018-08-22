@@ -302,7 +302,7 @@ class realmd(
   }
 
   -&gt; exec { &quot;join realm&quot;:
-    command =&gt; &quot;/bin/echo ${ad_password} | realm join ${domain} -U ${ad_username} --computer-ou=${_ou}&quot;,
+    command =&gt; &quot;/bin/echo ${ad_password} | realm join &#39;${domain}&#39; -U &#39;${ad_username}&#39; --computer-ou=&#39;${_ou}&#39;&quot;,
     path    =&gt; &quot;/usr/bin:/usr/sbin:/bin:/usr/local/bin&quot;,
     creates =&gt; &quot;/etc/krb5.keytab&quot;,
   }

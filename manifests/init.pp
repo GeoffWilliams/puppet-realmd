@@ -44,7 +44,7 @@ class realmd(
   }
 
   -> exec { "join realm":
-    command => "/bin/echo ${ad_password} | realm join ${domain} -U ${ad_username} --computer-ou=${_ou}",
+    command => "/bin/echo ${ad_password} | realm join '${domain}' -U '${ad_username}' --computer-ou='${_ou}'",
     path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",
     creates => "/etc/krb5.keytab",
   }
