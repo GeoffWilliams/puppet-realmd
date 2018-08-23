@@ -9,3 +9,8 @@
 @test "groups with spaces handled correctly" {
     grep ",domain admins" /etc/sssd/sssd.conf
 }
+
+@test "correct domain was joined" {
+    realm list --name-only | grep 'realm$'
+}
+

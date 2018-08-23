@@ -13,6 +13,12 @@
 
 Realmd support for RHEL
 
+## Features
+
+* Join a single domain
+* Re-join to a different domain if `realm list --name-only` doesn't agree with the `domain` parameter
+* `simple_allow_groups` used for access control
+
 ## Usage
 See reference and examples
 
@@ -27,6 +33,9 @@ bundle exec puppet strings
 
 ## Limitations
 * Not supported by Puppet, Inc.
+* Supports joining a single realm only
+* Rewrites `/etc/sssd/sssd.conf` (template)
+* `simple_allow_groups` used for access control
 
 ## Development
 

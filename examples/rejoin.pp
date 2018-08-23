@@ -1,7 +1,6 @@
-
 #@PDQTest
 class { "realmd":
-  domain      => "realm",
+  domain      => "newrealm",
   ad_username => "join_user",
   ad_password => "topsecret",
   ou          => ['linux', 'main'],

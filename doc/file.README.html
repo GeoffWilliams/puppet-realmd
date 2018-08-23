@@ -83,6 +83,16 @@ module</a></p>
 
 <p>Realmd support for RHEL</p>
 
+<h2 id="label-Features">Features</h2>
+<ul><li>
+<p>Join a single domain</p>
+</li><li>
+<p>Re-join to a different domain if <code>realm list --name-only</code>
+doesn&#39;t agree with the <code>domain</code> parameter</p>
+</li><li>
+<p><code>simple_allow_groups</code> used for access control</p>
+</li></ul>
+
 <h2 id="label-Usage">Usage</h2>
 
 <p>See reference and examples</p>
@@ -103,6 +113,12 @@ may regenerate the documentation by running:</p>
 <h2 id="label-Limitations">Limitations</h2>
 <ul><li>
 <p>Not supported by Puppet, Inc.</p>
+</li><li>
+<p>Supports joining a single realm only</p>
+</li><li>
+<p>Rewrites <code>/etc/sssd/sssd.conf</code> (template)</p>
+</li><li>
+<p><code>simple_allow_groups</code> used for access control</p>
 </li></ul>
 
 <h2 id="label-Development">Development</h2>
