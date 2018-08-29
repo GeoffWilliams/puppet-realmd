@@ -1,6 +1,6 @@
 {
   "name": "geoffwilliams-realmd",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "geoffwilliams",
   "summary": "Realmd support for RHEL",
   "license": "Apache-2.0",
@@ -8,10 +8,7 @@
   "project_page": null,
   "issues_url": "https://api.github.com/repos/GeoffWilliams/puppet-realmd/issues{/number}",
   "dependencies": [
-    {
-      "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 1.0.0"
-    }
+
   ],
   "data_provider": null,
   "project_url": "https://github.com/GeoffWilliams/puppet-realmd.git"

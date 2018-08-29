@@ -3,13 +3,11 @@
 
 ## Classes
 
-* [`realmd`](#realmd): Realmd  Support for Relmd+SSSD on RHEL 7.
+* [`realmd`](#realmd): Support for Relmd+SSSD on RHEL 7.
 
 ## Classes
 
 ### realmd
-
-Realmd
 
 Support for Relmd+SSSD on RHEL 7.
 

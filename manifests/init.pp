@@ -1,6 +1,4 @@
-# Realmd
-#
-# Support for Relmd+SSSD on RHEL 7.
+# @summary Support for Relmd+SSSD on RHEL 7.
 #
 # @example joining a domain
 #   class { "realmd":
