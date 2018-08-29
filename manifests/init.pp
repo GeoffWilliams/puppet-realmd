@@ -29,9 +29,9 @@ class realmd(
 ) {
 
   # flatten the array of $ou
-  $_ou = join($ou.map |$o| {
+  $_ou = $ou.map |$o| {
     "OU=${o}"
-  }, ",")
+  }.join(",")
 
   Exec {
     path => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",
