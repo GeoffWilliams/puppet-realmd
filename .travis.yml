@@ -4,6 +4,8 @@
 # https://docs.travis-ci.com/user/common-build-problems/#Running-a-Container-Based-Docker-Image-Locally
 ---
 sudo: false
+# no magic we do it all ourself
+install: ~
 language: ruby
 services:
   - docker
