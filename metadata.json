@@ -5,14 +5,17 @@
   "summary": "Realmd support for RHEL",
   "license": "Apache-2.0",
   "source": "https://github.com/GeoffWilliams/puppet-realmd.git",
-  "project_page": null,
+  "project_page": "https://github.com/GeoffWilliams/puppet-realmd",
   "issues_url": "https://api.github.com/repos/GeoffWilliams/puppet-realmd/issues{/number}",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 1.0.0"
+      "version_requirement": "5.0.0"
     }
   ],
   "data_provider": null,
-  "project_url": "https://github.com/GeoffWilliams/puppet-realmd.git"
+  "project_url": "https://github.com/GeoffWilliams/puppet-realmd.git",
+  "pdk-version": "1.7.0",
+  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
+  "template-ref": "1.7.0-0-g57412ed"
 }
