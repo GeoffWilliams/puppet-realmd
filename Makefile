@@ -1,22 +1,22 @@
 all:
-	cd .pdqtest && bundle exec pdqtest all
+	cd .pdqtest && pwd && bundle exec pdqtest all
 	$(MAKE) docs
 
 fast:
-	cd .pdqtest && bundle exec pdqtest fast
+	cd .pdqtest && pwd && bundle exec pdqtest fast
 
 shell:
-	cd .pdqtest && bundle exec pdqtest --keep-container acceptance
+	cd .pdqtest && pwd && bundle exec pdqtest --keep-container acceptance
 
 setup:
-	cd .pdqtest && bundle exec pdqtest setup
+	cd .pdqtest && pwd && bundle exec pdqtest setup
 
 shellnopuppet:
-	cd .pdqtest && bundle exec pdqtest shell
+	cd .pdqtest && pwd && bundle exec pdqtest shell
 
 logical:
-	cd .pdqtest && bundle exec pdqtest syntax
-	cd .pdqtest && bundle exec pdqtest rspec
+	cd .pdqtest && pwd && bundle exec pdqtest syntax
+	cd .pdqtest && pwd && bundle exec pdqtest rspec
 	$(MAKE) docs
 
 nastyhack:
@@ -25,10 +25,10 @@ nastyhack:
 
 bundle:
 	# Install all gems into _normal world_ bundle so we can use all of em
-	cd .pdqtest && bundle install
+	cd .pdqtest && pwd && bundle install
 
 docs:
-	cd .pdqtest && bundle exec "cd ..&& puppet strings"
+	cd .pdqtest && pwd && bundle exec "cd ..&& puppet strings"
 
 
 
