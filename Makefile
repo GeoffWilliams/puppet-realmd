@@ -19,11 +19,11 @@ logical:
 	cd .pdqtest && pwd && bundle exec pdqtest rspec
 	$(MAKE) docs
 
-nastyhack:
-	# fix for - https://tickets.puppetlabs.com/browse/PDK-1192
-	find vendor -iname '*.pp' -exec rm {} \;
+#nastyhack:
+#	# fix for - https://tickets.puppetlabs.com/browse/PDK-1192
+#	find vendor -iname '*.pp' -exec rm {} \;
 
-bundle:
+pdqtestbundle:
 	# Install all gems into _normal world_ bundle so we can use all of em
 	cd .pdqtest && pwd && bundle install
 
@@ -31,4 +31,10 @@ docs:
 	cd .pdqtest && pwd && bundle exec "cd ..&& puppet strings"
 
 
+Gemfile.local:
+	echo "[🐌] Creating symlink and running pdk bundle..."
+	ln -s Gemfile.project Gemfile.local
+	$(MAKE) pdkbundle
 
+pdkbundle:
+	pdk bundle install
