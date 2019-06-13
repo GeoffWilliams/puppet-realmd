@@ -6,12 +6,8 @@
   "license": "Apache-2.0",
   "source": "https://github.com/GeoffWilliams/puppet-realmd.git",
   "project_page": "https://github.com/GeoffWilliams/puppet-realmd",
-  "issues_url": "https://api.github.com/repos/GeoffWilliams/puppet-realmd/issues{/number}",
+  "issues_url": "https://github.com/GeoffWilliams/puppet-realmd/issues",
   "dependencies": [
-    {
-      "name": "puppetlabs-stdlib",
-      "version_requirement": "5.0.0"
-    }
   ],
   "data_provider": null,
   "project_url": "https://github.com/GeoffWilliams/puppet-realmd.git",
